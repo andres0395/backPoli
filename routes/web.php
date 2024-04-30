@@ -12,6 +12,7 @@ use App\Http\Controllers\IpcController;
 use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\SedesController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\PeriodoController;
 use App\Http\Middleware\VerifyCsrfToken;
 
 Route::get('/', function () {
@@ -53,11 +54,13 @@ Route::post('/costos/delete', [CostoController::class, 'delete'])->middleware([A
 Route::get('/usuarios', [UsuariosController::class, 'show'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/usuarios/save', [UsuariosController::class, 'save'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/usuarios/update', [UsuariosController::class, 'update'])->middleware([App\Http\Middleware\Cors::class]);
+Route::post('/usuarios/updateByUser', [UsuariosController::class, 'updateByUser'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/usuarios/delete', [UsuariosController::class, 'delete'])->middleware([App\Http\Middleware\Cors::class]);
 
 //ContratoP1
 Route::get('/contratop1', [Contratop1Controller::class, 'show'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/contratop1/save', [Contratop1Controller::class, 'save'])->middleware([App\Http\Middleware\Cors::class]);
+Route::post('/contratop1/byuser', [Contratop1Controller::class, 'showByUser'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/contratop1/update', [Contratop1Controller::class, 'update'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/contratop1/delete', [Contratop1Controller::class, 'delete'])->middleware([App\Http\Middleware\Cors::class]);
 
@@ -84,4 +87,10 @@ Route::get('/reportes', [ReportesController::class, 'show'])->middleware([App\Ht
 Route::post('/reportes/save', [ReportesController::class, 'save'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/reportes/update', [ReportesController::class, 'update'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/reportes/delete', [ReportesController::class, 'delete'])->middleware([App\Http\Middleware\Cors::class]);
+
+//Periodo
+Route::get('/periodo', [PeriodoController::class, 'show'])->middleware([App\Http\Middleware\Cors::class]);
+Route::post('/periodo/save', [PeriodoController::class, 'save'])->middleware([App\Http\Middleware\Cors::class]);
+Route::post('/periodo/update', [PeriodoController::class, 'update'])->middleware([App\Http\Middleware\Cors::class]);
+Route::post('/periodo/delete', [PeriodoController::class, 'delete'])->middleware([App\Http\Middleware\Cors::class]);
 

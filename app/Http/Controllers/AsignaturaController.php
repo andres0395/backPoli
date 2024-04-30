@@ -39,7 +39,7 @@ class AsignaturaController extends Controller
     {
         $asignatura = Asignatura::find($request->id);
         if($asignatura->id_asignatura != $request->id_asignatura){
-            $asignaturaExist = Asignatura::where('id_asignatura', $request->id_asignatura)->first();
+            $asignaturaExist = Asignatura::where('id_asignatura', $request->id_asignatura)->where('id_abreviatura', $request->id_abreviatura)->first();
             if (!!$asignaturaExist) {
                 return response()->json(['status' => false, 'message' => 'Ya existe una Asignatura con ese Id', 'msg'=>$asignaturaExist], 500);
             }
@@ -58,7 +58,7 @@ class AsignaturaController extends Controller
 
     public function delete(Request $request)
     {
-        $asignatura = Asignatura::where('id_asignatura', $request->id_asignatura)->first();
+        $asignatura = Asignatura::find($request->id);
 
         if (!$asignatura) {
             return response()->json(['status' => false, 'message' => 'Dato no encontrado'], 404);

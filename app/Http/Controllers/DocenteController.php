@@ -24,6 +24,7 @@ class DocenteController extends Controller
         $docente->categoria = $request->categoria;
         $docente->estudios = $request->estudios;
         $docente->valor_hora = $request->valor_hora;
+        $docente->fecha_nacimiento = $request->fecha_nacimiento;
         $docenteExist = Docente::where('id_docente', $request->id_docente)->first();
         if (!$docenteExist){
             $saved = $docente->save();

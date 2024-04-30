@@ -54,7 +54,20 @@ class UsuariosController extends Controller
 
         return response()->json(['status' => true, 'message' => 'Actualizado exitosamente'], 200);
     }
-
+    public function updateByUser(Request $request){
+        $usuario = Usuarios::find($request->id);
+    if ($usuario) {
+        $usuario->estado = $request->estado;
+        $msg = 'Usuario Desbloqueado';
+        if($request->estado =='BLOQUEADO'){
+            $msg = 'Usuario Bloqueado';
+        }
+        $usuario->save();
+        return response()->json(['status' => true,'message' => $msg], 200);
+    } else {
+        return response()->json(['error' => 'El usuario no existe'], 404);
+    }
+    }
     public function delete(Request $request)
     {
         $usuario = Usuarios::where('id_usuario', $request->id_usuario)->first();

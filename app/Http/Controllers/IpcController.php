@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Ipc;
 use Illuminate\Http\Request;
+use App\Models\Costo;
+use App\Models\Docente;
 
 class IpcController extends Controller
 {
@@ -21,12 +23,20 @@ class IpcController extends Controller
         $ipc->porcentaje = $request->porcentaje;
         $ipc->fecha_aplicacion = $request->fecha_aplicacion;
         $ipcExist = Ipc::where('id_ipc', $request->id_ipc)->first();
+        $Costo = Costo::all();
+        $Docente = Docente::all();
         if (!$ipcExist){
             $saved = $ipc->save();
             if (!$saved) {
                 return response()->json(['status' => false, 'message' => 'Error al guardar'], 500);
             }
-            return response()->json(['status' => true, 'message' => 'Creado exitosamente'], 201);
+            foreach ($Costo as $key => $value) {
+                Costo::where('id', $value['id'])->update(['valor_hora' => $value['valor_hora']*$ipc->porcentaje]);
+            }
+            foreach ($Docente as $key => $value) {
+                Docente::where('id', $value['id'])->update(['valor_hora' => $value['valor_hora']*$ipc->porcentaje]);
+            }
+            return response()->json(['status' => true, 'message' => 'Creado exitosamente','msg'=>$Costo], 201);
         }
         return response()->json(['status' => false, 'message' => 'Ya existe un Ipc con ese Id', 'msg'=>$ipcExist], 500);
 

@@ -17,7 +17,8 @@ class Docente extends Model
         'nivel',
         'categoria',
         'estudios',
-        'valor_hora'
+        'valor_hora',
+        'fecha_nacimiento'
     ];
 
 }

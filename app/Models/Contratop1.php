@@ -17,6 +17,12 @@ class Contratop1 extends Model
         'id_usuario',
         'fecha_inicio',
         'fecha_fin',
-        'total_semanas'
+        'total_semanas',
+        'id_dependencia',
+        'fecha_contrato',
+        'valor_hora',
+        'valor_total',
+        'asignatura',
+        'estado'
     ];
 }
