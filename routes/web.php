@@ -61,8 +61,10 @@ Route::post('/usuarios/delete', [UsuariosController::class, 'delete'])->middlewa
 Route::get('/contratop1', [Contratop1Controller::class, 'show'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/contratop1/save', [Contratop1Controller::class, 'save'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/contratop1/byuser', [Contratop1Controller::class, 'showByUser'])->middleware([App\Http\Middleware\Cors::class]);
+Route::get('/contratop1/bystate', [Contratop1Controller::class, 'showByState'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/contratop1/update', [Contratop1Controller::class, 'update'])->middleware([App\Http\Middleware\Cors::class]);
 Route::post('/contratop1/delete', [Contratop1Controller::class, 'delete'])->middleware([App\Http\Middleware\Cors::class]);
+Route::post('/contratop1/updateState', [Contratop1Controller::class, 'updateState'])->middleware([App\Http\Middleware\Cors::class]);
 
 //ContratoP2
 Route::get('/contratop2', [Contratop2Controller::class, 'show'])->middleware([App\Http\Middleware\Cors::class]);

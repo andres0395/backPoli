@@ -23,6 +23,8 @@ class Contratop1 extends Model
         'valor_hora',
         'valor_total',
         'asignatura',
-        'estado'
+        'estado',
+        'total_horas',
+        'notificaciones'
     ];
 }

@@ -23,6 +23,13 @@ class Contratop1Controller extends Controller
         $contratos = Contratop1::whereDate('fecha_fin', '>=', $fechaHoy)->where('id_usuario', $id_usuario)->get();
         return $contratos;
     }
+    public function showByState(Request $request)
+    {
+        $fechaHoy = Carbon::now();
+        $contratos = Contratop1::whereDate('fecha_fin', '>=', $fechaHoy)
+        ->where('estado', '!=', 'DI')->get();
+        return $contratos;
+    }
 
     public function save(Request $request)
     {
@@ -40,6 +47,8 @@ class Contratop1Controller extends Controller
         $contratop1->valor_total = $request->valor_total;
         $contratop1->asignatura = $request->asignaturas;
         $contratop1->estado = $request->estado;
+        $contratop1->total_horas = $request->total_horas;
+        $contratop1->notificaciones = false;
         $contratop1Exist = Contratop1::where('id_contratop1', $request->id_contratop1)->first();
         if (!$contratop1Exist){
             $saved = $contratop1->save();
@@ -72,7 +81,19 @@ class Contratop1Controller extends Controller
 
         return response()->json(['status' => true, 'message' => 'Actualizado exitosamente'], 200);
     }
+    public function updateState(Request $request){
+        $contratop1 = Contratop1::find($request->id);
+    if ($contratop1) {
+        $contratop1->estado = $request->estado;
+        $msg = 'Contrato pendiente de aprobación';
 
+        $contratop1->save();
+        if (!$contratop1) {
+            return response()->json(['status' => false, 'message' => 'Error al actualizar'], 500);
+        }
+        return response()->json(['status' => true,'message' => $msg], 200);
+        }
+    }
     public function delete(Request $request)
     {
         $contratop1 = Contratop1::where('id_contratop1', $request->id_contratop1)->first();
