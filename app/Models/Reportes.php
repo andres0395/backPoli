@@ -11,9 +11,8 @@ class Reportes extends Model
     protected $table = 'reportes';
 
     protected $fillable = [
-        'id_reporte',
         'id_usuario',
-        'id_contratop3',
-        'fecha_reporte'
+        'fecha_reporte',
+        'fecha_contrato',
     ];
 }

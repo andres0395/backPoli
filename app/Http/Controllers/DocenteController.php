@@ -24,7 +24,9 @@ class DocenteController extends Controller
         $docente->categoria = $request->categoria;
         $docente->estudios = $request->estudios;
         $docente->valor_hora = $request->valor_hora;
+        $docente->tipo_docente = $request->tipo_docente;
         $docente->fecha_nacimiento = $request->fecha_nacimiento;
+        // 1 catedra 2 vinculado
         $docenteExist = Docente::where('id_docente', $request->id_docente)->first();
         if (!$docenteExist){
             $saved = $docente->save();
@@ -61,13 +63,12 @@ class DocenteController extends Controller
     public function delete(Request $request)
     {
         $docente = Docente::where('id_docente', $request->id_docente)->first();
-
         if (!$docente) {
             return response()->json(['status' => false, 'message' => 'Dato no encontrado'], 404);
         }
         $deleted = $docente->delete();
-
-
+        Contratop1::where('id_docente', $request->id_docente)->update(['estado' => 'CA',
+        'motivo' => 'Docente Retirado','notificaciones' => false]);
         if (!$deleted) {
             return response()->json(['status' => false, 'message' => 'Error al eliminar'], 500);
         }

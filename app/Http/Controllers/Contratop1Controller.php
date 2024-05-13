@@ -49,6 +49,8 @@ class Contratop1Controller extends Controller
         $contratop1->estado = $request->estado;
         $contratop1->total_horas = $request->total_horas;
         $contratop1->notificaciones = false;
+        $contratop1->servicio = $request->servicio;
+        $contratop1->motivo = '';
         $contratop1Exist = Contratop1::where('id_contratop1', $request->id_contratop1)->first();
         if (!$contratop1Exist){
             $saved = $contratop1->save();
@@ -64,12 +66,6 @@ class Contratop1Controller extends Controller
     public function update(Request $request)
     {
         $contratop1 = Contratop1::find($request->id);
-        if($contratop1->id_contratop1 != $request->id_contratop1){
-            $contratop1Exist = Contratop1::where('id_contratop1', $request->id_contratop1)->first();
-            if (!!$contratop1Exist) {
-                return response()->json(['status' => false, 'message' => 'Ya existe una Contrato con ese Id', 'msg'=>$contratop1Exist], 500);
-            }
-        }
         if (!$contratop1) {
             return response()->json(['status' => false, 'message' => 'Dato no encontrado'], 404);
         }

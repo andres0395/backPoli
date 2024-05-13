@@ -17,6 +17,7 @@ class Asignatura extends Model
         'nombre',
         'horas_clase',
         'horas_asesoria',
-        'horas_evaluacion'
+        'horas_evaluacion',
+        'servicio'
     ];
 }

@@ -25,6 +25,8 @@ class Contratop1 extends Model
         'asignatura',
         'estado',
         'total_horas',
-        'notificaciones'
+        'notificaciones',
+        'motivo',
+        'servicio'
     ];
 }

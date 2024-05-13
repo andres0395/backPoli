@@ -24,6 +24,7 @@ class AsignaturaController extends Controller
         $asignatura->horas_clase = $request->horas_clase;
         $asignatura->horas_asesoria = $request->horas_asesoria;
         $asignatura->horas_evaluacion = $request->horas_evaluacion;
+        $asignatura->servicio = $request->servicio;
         $asignaturaExist = Asignatura::where('id_asignatura', $request->id_dependencia)->first();
         if (!$asignaturaExist){
             $saved = $asignatura->save();
